@@ -60,17 +60,31 @@ Most of the points here remain the same as sub task 1. Some of the important det
     ```
 
     </details>
+- The embedding model having best validation accuracy was saved and then I finally trained the classifier using the embedding model on the MNIST train split and validated the results.
+- I then trained the embedding model from scratch using the same architecture. The embedding model was trained for 5 epochs only (the number of epochs I used to fine tune the embedding model). I then saved the model having highest validation score on the kNN Classifier.
+- Both of the models, the fine-tuned one and the one trained from scratch perform exceptionally well and took no time to converge. The models performed equally in terms of comparision.
+- The above acheivement can be attributed to the novel triplet loss. All the images were transformed into 128 dimensional feature vectors and hence the models converged fast, even without any pre-training.
+- The losses and accuracy plots for both of the trainings is shown below:
+    <details><summary>Training and Validation stats on MNIST for pre-trained model</summary>
 
-
-
-
-
-
-
-    <details><summary></summary>
-
-    ```python
-    
-    ```
+    ![Training accuracy vs Validation accuracy- MNIST fine-tuned](assets/subTask2-1Accuracy.png)
+    ![Training accuracy vs Validation accuracy- MNIST fine-tuned](assets/subTask2-1Loss.png)
 
     </details>
+
+    <details><summary>Training and Validation stats on MNIST for scratch model</summary>
+
+    ![Training accuracy vs Validation accuracy- MNIST scratch](assets/subTask2-2Accuracy.png)
+    ![Training accuracy vs Validation accuracy- MNIST scratch](assets/subTask2-2Loss.png)
+
+    </details>
+- As we can see both of the models performed equally well right from the start, so comparing them is a bit difficult.
+- But here once again the fine-tuned model started overfitting, as the embedding layers were frozen and the model could not generalize on them. 
+- This does not happen in the case of the model which was trained from scratch, as in this case the embedding layers were trained on the same dataset.
+  
+## Citations
+While I tried to write most the code from my own knowledge, I took important sections from the following tutorials and blogs. I have also mentioned the Literature I reffered to:
+- [PyTorch Tutorial - Victor Basu](https://www.kaggle.com/basu369victor/pytorch-tutorial-the-classification)
+- [PyTorch Metric Learning Tutorial- Kevin Musgrave](https://github.com/KevinMusgrave/pytorch-metric-learning/blob/master/examples/notebooks/TripletMarginLossMNIST.ipynb)
+- [FaceNet](https://arxiv.org/pdf/1503.03832.pdf)
+- [Visualizing and Understanding Convolutional Networks](https://arxiv.org/abs/1311.2901)
